@@ -1,4 +1,5 @@
-streamlit == 1.51
+streamlit
 pandas
 numpy
 matplotlib
+openpyxl
