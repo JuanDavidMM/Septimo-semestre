@@ -5,4 +5,5 @@ plotly
 pydeck
 Pillow
 openpyxl
-    
+matplotlib
+
