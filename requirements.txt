@@ -5,4 +5,4 @@ plotly
 pydeck
 Pillow
 openpyxl
-    
+google-generativeai
