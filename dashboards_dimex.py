@@ -4,6 +4,8 @@ from data_dimex import build_filters
 from metrics_dimex import compute_kpis
 from components_dimex import render_kpi_cards, render_risk_chart, render_metrics_tab
 from ml_clusters_dimex import render_cluster_tab
+from chatbot_dimex import render_chatbot_tab
+
 
 
 def render_admin_dashboard():
@@ -15,11 +17,12 @@ def render_admin_dashboard():
         return
 
     # Tabs principales del dashboard
-    tab_resumen, tab_ml, tab_table = st.tabs(
+    tab_resumen, tab_ml, tab_table, tab_chatbot = st.tabs(
         [
             "📊 Resumen cartera",
             "🧠 Clusters ML por sucursal",
             "📑 Tabla detallada",
+            "🤖 Chatbot IA"
         ]
     )
 
@@ -49,6 +52,11 @@ def render_admin_dashboard():
     # TAB 3: Tabla detallada
     with tab_table:
         render_metrics_tab(df_filtered)
+
+    # TAB 4: Chatbot
+    with tab_chatbot:
+        render_chatbot_tab(role="admin")
+
 
 
 def render_employee_dashboard():

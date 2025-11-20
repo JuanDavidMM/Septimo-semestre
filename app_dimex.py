@@ -2,12 +2,18 @@ import streamlit as st
 from pathlib import Path
 from PIL import Image
 
+from chatbot_dimex import render_chatbot_tab
 from styles_dimex import inject_css
 from auth_dimex import show_login
 from dashboards_dimex import render_admin_dashboard, render_employee_dashboard
 
+import streamlit as st
+import google.generativeai as genai
 
-# -------------------------------------------------------------------
+
+
+
+
 # CONFIGURACIÓN BÁSICA
 # -------------------------------------------------------------------
 BASE_DIR = Path(__file__).parent
