@@ -32,9 +32,11 @@ def render_chatbot_tab(role="admin"):
     st.header("🤖 Asistente Inteligente Dimex")
     st.caption("Puedes cargar un archivo Excel para que el chatbot lo use como contexto.")
 
-    # ---- SUBIR ARCHIVO
+    # ---- SUBIR ARCHIVO con key dinámica por rol
     uploaded_file = st.file_uploader(
-        "Subir archivo (Excel .xlsx)", type=["xlsx"], key="chatbot_file_uploader"
+        "Subir archivo (Excel .xlsx)",
+        type=["xlsx"],
+        key=f"chatbot_file_uploader_{role.lower()}"
     )
 
     df = None
@@ -62,8 +64,11 @@ def render_chatbot_tab(role="admin"):
         with st.chat_message(msg["role"]):
             st.write(msg["content"])
 
-    # ---- INPUT DEL USUARIO
-    user_input = st.chat_input("Escribe tu mensaje...")
+    # ---- INPUT DEL USUARIO con key dinámica por rol
+    user_input = st.chat_input(
+        "Escribe tu mensaje...",
+        key=f"chat_input_{role.lower()}"
+    )
 
     if user_input:
         st.session_state.chat_history.append({"role": "user", "content": user_input})
@@ -78,6 +83,7 @@ def render_chatbot_tab(role="admin"):
                 + df.head(234).to_string()
             )
 
+            # Mantengo tu texto completo de prompt consolidado
             contexto += """b) Versión Consolidada del Equipo
 Agente de IA Generativa para Gestión de Riesgo, Cobranza y Operaciones en Dimex
 b.1) Objetivos del Agente Generativo
@@ -324,7 +330,9 @@ Optimiza operaciones
 Agiliza cobranza
 Alínea áreas completas bajo un mismo criterio
 Es una solución completa, pragmática y directamente conectada a impacto financiero.
- """
+
+"""
+        # Nota: Puedes mantener el resto de tu texto original aquí completo
 
         prompt = contexto + "\n\nPregunta del usuario: " + user_input
 

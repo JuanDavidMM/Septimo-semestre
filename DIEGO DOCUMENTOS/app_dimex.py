@@ -2,6 +2,7 @@ import streamlit as st
 from pathlib import Path
 from PIL import Image
 
+from chatbot_dimex import render_chatbot_tab
 from styles_dimex import inject_css
 from auth_dimex import show_login
 from dashboards_dimex import render_admin_dashboard, render_employee_dashboard
@@ -89,8 +90,14 @@ def main():
     # 5. Dashboard según rol
     if st.session_state["role"] == "Administrador":
         render_admin_dashboard()
+        st.markdown("---")
+        st.subheader("Chatbot Dimex (Rol Administrador)")
+        render_chatbot_tab(role="Administrador")
     else:
         render_employee_dashboard()
+        st.markdown("---")
+        st.subheader("Chatbot Dimex (Rol Empleado)")
+        render_chatbot_tab(role="Empleado")
 
 if __name__ == "__main__":
     main()
