@@ -6,3 +6,4 @@ pydeck
 Pillow
 openpyxl
 google-generativeai
+matplotlib
